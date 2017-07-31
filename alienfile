@@ -1,0 +1,18 @@
+use alienfile;
+
+# https://poppler.freedesktop.org/
+share {
+	plugin Download => (
+		url => 'https://poppler.freedesktop.org/releases.html',
+		version => qr/poppler-([\d.]+)\.tar\.xz/,
+	);
+
+	plugin Extract => 'tar.xz';
+
+	plugin 'Build::Autoconf' => ();
+	build [
+		[ '%{configure}' ],
+		[ '%{make}' ],
+		[ '%{make}', 'install' ],
+	]
+};

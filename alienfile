@@ -11,7 +11,7 @@ share {
 
 	plugin 'Build::Autoconf' => ();
 	build [
-		[ '%{configure}' ],
+		[ '%{configure} --enable-xpdf-headers' ],
 		[ '%{make}' ],
 		[ '%{make}', 'install' ],
 	]

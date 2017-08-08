@@ -4,7 +4,11 @@ package Alien::Poppler;
 use strict;
 use warnings;
 
-use parent qw(Alien::Base);
+use base qw( Alien::Base );
+use Role::Tiny::With qw( with );
+
+with 'Alien::Role::Dino';
+
 use File::Spec;
 
 =method pdftotext_path

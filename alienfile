@@ -5,6 +5,7 @@ plugin 'PkgConfig' => (
 	minimum_version => '0.52.0',
 );
 
+requires 'Alien::Build::Plugin::Gather::Dino';
 requires 'Env::ShellWords' => '0.01';
 
 # https://poppler.freedesktop.org/
@@ -25,5 +26,7 @@ share {
 		[ '%{configure} --enable-xpdf-headers' ],
 		[ '%{make}' ],
 		[ '%{make}', 'install' ],
-	]
+	];
+
+	plugin 'Gather::Dino';
 };

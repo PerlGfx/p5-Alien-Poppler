@@ -1,5 +1,12 @@
 use alienfile;
 
+plugin 'PkgConfig' => (
+	pkg_name => 'poppler',
+	minimum_version => '0.52.0',
+);
+
+requires 'Env::ShellWords' => '0.01';
+
 # https://poppler.freedesktop.org/
 share {
 	plugin Download => (
@@ -8,6 +15,10 @@ share {
 	);
 
 	plugin Extract => 'tar.xz';
+
+	plugin 'Build::SearchDep' => (
+		aliens => [ qw( Alien::OpenJPEG ) ],
+	);
 
 	plugin 'Build::Autoconf' => ();
 	build [

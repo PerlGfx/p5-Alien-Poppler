@@ -6,7 +6,9 @@ plugin 'PkgConfig' => (
 );
 
 requires 'Alien::Build::Plugin::Gather::Dino';
+requires 'Alien::OpenJPEG';
 requires 'Env::ShellWords' => '0.01';
+use Env qw($LDFLAGS);
 
 # https://poppler.freedesktop.org/
 share {
@@ -17,6 +19,10 @@ share {
 
 	plugin Extract => 'tar.xz';
 
+	eval {
+		require Alien::OpenJPEG;
+		$LDFLAGS .= ' ' . Alien::OpenJPEG->libs;
+	};
 	plugin 'Build::SearchDep' => (
 		aliens => [ qw( Alien::OpenJPEG ) ],
 	);

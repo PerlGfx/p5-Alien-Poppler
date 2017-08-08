@@ -5,6 +5,8 @@ use Alien::Poppler;
 use Capture::Tiny qw(capture_merged);
 
 subtest "pdftotext utility" => sub {
+	use Env qw(@LD_LIBRARY_PATH);
+	unshift @LD_LIBRARY_PATH, Alien::Poppler->rpath;
 	my $pdftotext = Alien::Poppler->pdftotext_path;
 	ok -f $pdftotext, 'pdftotext utility is installed';
 

@@ -32,6 +32,7 @@ matrix:
       sudo: false
     - perl: "system"
       os: osx
+      osx_image: xcode8.3
   allow_failures:
     - perl: blead       # ignore failures for blead perl
 before_install:

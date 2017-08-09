@@ -37,4 +37,8 @@ matrix:
     - perl: blead       # ignore failures for blead perl
 before_install:
   - export DEVOPS_BRANCH="master"
+  - >
+    if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      rm -v maint/cpanfile-git-log/project-renard/p5-Alien-OpenJPEG/config.yml
+    fi
   - eval "$(curl https://raw.githubusercontent.com/project-renard/devops/$DEVOPS_BRANCH/script/helper.pl | perl -- | awk '/^#START/,/^#END/ { print > "/dev/stdout"; next } { print > "/dev/stderr"}' )"

@@ -6,8 +6,20 @@ native:
       - libjpeg-dev
   macos-homebrew:
     packages:
-      - cmake
       - pkg-config
+      - cairo
+      - fontconfig
+      - freetype
+      - gettext
+      - glib
+      - gobject-introspection
+      - jpeg
+      - libpng
+      - libtiff
+
+      # Alien::OpeJPEG will provide openjpeg library
+      #- openjpeg
+      - cmake # for Alien::OpenJPEG build
   msys2-mingw64:
     packages:
       - mingw-w64-x86_64-cmake

@@ -5,6 +5,7 @@ plugin 'PkgConfig' => (
 	minimum_version => '0.52.0',
 );
 
+requires 'Alien::gmake';
 requires 'Alien::Build::Plugin::Gather::Dino';
 requires 'Alien::OpenJPEG';
 requires 'Env::ShellWords' => '0.01';
@@ -30,8 +31,8 @@ share {
 	plugin 'Build::Autoconf' => ();
 	build [
 		[ '%{configure} --enable-xpdf-headers' ],
-		[ '%{make}' ],
-		[ '%{make}', 'install' ],
+		[ '%{gmake}' ], # , 'V=1'
+		[ '%{gmake}', 'install' ],
 	];
 
 	plugin 'Gather::Dino';

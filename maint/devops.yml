@@ -3,6 +3,7 @@ native:
   debian:
     packages:
       - cmake
+      - libjpeg-dev
   macos-homebrew:
     packages:
       - cmake

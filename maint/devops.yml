@@ -2,7 +2,6 @@
 native:
   debian:
     packages:
-      - cmake
       - libjpeg-dev
   macos-homebrew:
     packages:
@@ -19,7 +18,5 @@ native:
 
       # Alien::OpeJPEG will provide openjpeg library
       #- openjpeg
-      - cmake # for Alien::OpenJPEG build
   msys2-mingw64:
-    packages:
-      - mingw-w64-x86_64-cmake
+    packages: []

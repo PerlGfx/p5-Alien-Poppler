@@ -1,13 +1,15 @@
 #!/usr/bin/env perl
 
 use Test::Most tests => 1;
+use Alien::OpenJPEG;
 use Alien::Poppler;
 use Capture::Tiny qw(capture_merged);
 
 subtest "pdftotext utility" => sub {
-	use Env qw(@LD_LIBRARY_PATH @DYLD_FALLBACK_LIBRARY_PATH);
+	use Env qw(@LD_LIBRARY_PATH @DYLD_FALLBACK_LIBRARY_PATH @PATH);
 	unshift @LD_LIBRARY_PATH, Alien::Poppler->rpath;
 	unshift @DYLD_FALLBACK_LIBRARY_PATH, Alien::Poppler->rpath;
+	unshift @PATH, Alien::Poppler->rpath, Alien::OpenJPEG->rpath;
 
 	my $pdftotext = Alien::Poppler->pdftotext_path;
 	ok -f $pdftotext, 'pdftotext utility is installed';

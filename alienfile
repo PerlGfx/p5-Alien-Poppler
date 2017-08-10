@@ -1,5 +1,16 @@
 use alienfile;
 
+plugin 'PkgConfig' => (
+	pkg_name => 'poppler',
+	minimum_version => '0.52.0',
+);
+
+requires 'Alien::gmake';
+requires 'Alien::Build::Plugin::Gather::Dino';
+requires 'Alien::OpenJPEG';
+requires 'Env::ShellWords' => '0.01';
+use Env qw($LDFLAGS);
+
 # https://poppler.freedesktop.org/
 share {
 	plugin Download => (
@@ -9,10 +20,20 @@ share {
 
 	plugin Extract => 'tar.xz';
 
+	eval {
+		require Alien::OpenJPEG;
+		$LDFLAGS .= ' ' . Alien::OpenJPEG->libs;
+	};
+	plugin 'Build::SearchDep' => (
+		aliens => [ qw( Alien::OpenJPEG ) ],
+	);
+
 	plugin 'Build::Autoconf' => ();
 	build [
-		[ '%{configure}' ],
-		[ '%{make}' ],
-		[ '%{make}', 'install' ],
-	]
+		[ '%{configure} --enable-xpdf-headers' ],
+		[ '%{gmake}' ], # , 'V=1'
+		[ '%{gmake}', 'install' ],
+	];
+
+	plugin 'Gather::Dino';
 };

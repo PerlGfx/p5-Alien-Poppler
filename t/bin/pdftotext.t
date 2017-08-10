@@ -12,7 +12,6 @@ subtest "pdftotext utility" => sub {
 	unshift @PATH, Alien::Poppler->rpath, Alien::OpenJPEG->rpath;
 
 	my $pdftotext = Alien::Poppler->pdftotext_path;
-	ok -f $pdftotext, 'pdftotext utility is installed';
 
 	my ($merged, $result) = capture_merged {
 		system($pdftotext, qw(-v));

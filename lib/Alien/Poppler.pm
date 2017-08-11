@@ -22,4 +22,9 @@ sub pdftotext_path {
 	File::Spec->catfile( File::Spec->rel2abs($self->dist_dir) , 'bin', 'pdftotext' );
 }
 
+sub pkg_config_path {
+	my ($class) = @_;
+	File::Spec->catfile( File::Spec->rel2abs($class->dist_dir), qw(lib pkgconfig) );
+}
+
 1;

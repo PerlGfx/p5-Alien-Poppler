@@ -19,7 +19,7 @@ to the C<pdftotext> binary.
 =cut
 sub pdftotext_path {
 	my ($self) = @_;
-	File::Spec->catfile( File::Spec->rel2abs($self->dist_dir) , 'bin', 'pdftotext' );
+	File::Spec->catfile( File::Spec->rel2abs($self->dist_dir) , qw(bin pdftotext) );
 }
 
 sub pkg_config_path {

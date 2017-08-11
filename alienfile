@@ -20,10 +20,11 @@ share {
 
 	plugin Extract => 'tar.xz';
 
+	# warn is fine here because this is part of configure-time
 	eval {
 		require Alien::OpenJPEG;
 		$LDFLAGS .= ' ' . Alien::OpenJPEG->libs;
-	} or die "Unable to add to \$LDFLAGS ($LDFLAGS): $@";
+	} or warn "Unable to add to \$LDFLAGS ($LDFLAGS): $@";
 	plugin 'Build::SearchDep' => (
 		aliens => [ qw( Alien::OpenJPEG ) ],
 	);

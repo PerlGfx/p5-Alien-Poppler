@@ -23,7 +23,7 @@ share {
 	eval {
 		require Alien::OpenJPEG;
 		$LDFLAGS .= ' ' . Alien::OpenJPEG->libs;
-	};
+	} or die "Unable to add to \$LDFLAGS ($LDFLAGS): $@";
 	plugin 'Build::SearchDep' => (
 		aliens => [ qw( Alien::OpenJPEG ) ],
 	);

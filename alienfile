@@ -9,6 +9,7 @@ requires 'Alien::gmake';
 requires 'Alien::Build::Plugin::Gather::Dino';
 requires 'Alien::OpenJPEG';
 requires 'Env::ShellWords' => '0.01';
+requires 'Path::Tiny' => 0;
 use Env qw($LDFLAGS);
 
 # https://poppler.freedesktop.org/
@@ -28,6 +29,14 @@ share {
 	plugin 'Build::SearchDep' => (
 		aliens => [ qw( Alien::OpenJPEG ) ],
 	);
+
+
+	patch sub {
+		my($splash_bitmap) = Path::Tiny->new('splash/SplashBitmap.h');
+		$splash_bitmap->edit_lines(sub {
+			s{\Qpoppler/GfxState.h\E}{GfxState.h}g;
+		});
+	};
 
 	plugin 'Build::Autoconf' => ();
 	build [

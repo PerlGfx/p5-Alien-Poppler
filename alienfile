@@ -38,10 +38,11 @@ share {
 		});
 	};
 
-	plugin 'Build::Autoconf' => ();
 	build [
-		[ '%{configure} --enable-xpdf-headers' ],
-		[ '%{gmake}' ], # , 'V=1'
+		[ 'cmake', qw(-G), 'Unix Makefiles',
+			'-DCMAKE_INSTALL_PREFIX:PATH=%{.install.prefix}',
+			'.' ],
+		[ '%{gmake}' ],
 		[ '%{gmake}', 'install' ],
 	];
 

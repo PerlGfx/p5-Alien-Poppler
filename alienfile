@@ -41,6 +41,7 @@ share {
 	build [
 		[ 'cmake', qw(-G), 'Unix Makefiles',
 			'-DCMAKE_INSTALL_PREFIX:PATH=%{.install.prefix}',
+			( '-DENABLE_GLIB=OFF' )x!!( $^O eq 'darwin' ),
 			'.' ],
 		[ '%{gmake}' ],
 		[ '%{gmake}', 'install' ],

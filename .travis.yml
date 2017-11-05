@@ -7,7 +7,7 @@ cache:
 addons:
   apt:
     packages:
-      - cmake      # for Alien::OpenJPEG
+      - cmake
       - libjpeg-dev
       - aspell     # for dzil Test::PodSpelling
       - aspell-en  # for dzil Test::PodSpelling

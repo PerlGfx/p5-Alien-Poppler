@@ -24,3 +24,4 @@ native:
     packages:
       - mingw-w64-x86_64-cmake
       - mingw-w64-x86_64-libjpeg-turbo
+      - mingw-w64-x86_64-freetype

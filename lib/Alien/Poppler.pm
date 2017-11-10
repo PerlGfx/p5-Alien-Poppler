@@ -10,6 +10,8 @@ use Role::Tiny::With qw( with );
 with 'Alien::Role::Dino';
 
 use File::Spec;
+use File::Which;
+use ExtUtils::PkgConfig;
 
 =method pdftotext_path
 
@@ -18,13 +20,21 @@ to the C<pdftotext> binary.
 
 =cut
 sub pdftotext_path {
-	my ($self) = @_;
-	File::Spec->catfile( File::Spec->rel2abs($self->dist_dir) , qw(bin pdftotext) );
+	my ($class) = @_;
+	if( $class->install_type eq 'share' ) {
+		return File::Spec->catfile( File::Spec->rel2abs($class->dist_dir) , qw(bin pdftotext) );
+	} else {
+		return which('pdftotext');
+	}
 }
 
 sub pkg_config_path {
 	my ($class) = @_;
-	File::Spec->catfile( File::Spec->rel2abs($class->dist_dir), qw(lib pkgconfig) );
+	if( $class->install_type eq 'share' ) {
+		return File::Spec->catfile( File::Spec->rel2abs($class->dist_dir), qw(lib pkgconfig) );
+	} else {
+		return ExtUtils::PkgConfig->variable('poppler', 'pcfiledir');
+	}
 }
 
 1;

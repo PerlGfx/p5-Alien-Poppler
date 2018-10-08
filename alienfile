@@ -59,6 +59,7 @@ share {
 		[ 'cmake', qw(-G), 'Unix Makefiles',
 			'-DCMAKE_INSTALL_PREFIX:PATH=%{.install.prefix}',
 			'-DENABLE_XPDF_HEADERS=ON',
+			( '-DENABLE_GOBJECT_INTROSPECTION=OFF' )x!!( $^O eq 'MSWin32' ),
 			( '-DENABLE_GLIB=OFF' )x!!( $^O eq 'darwin' ),
 			'.' ],
 		[ '%{gmake}' ],

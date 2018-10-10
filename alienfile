@@ -48,12 +48,21 @@ share {
 			});
 		}
 
+		# Bug in Poppler v0.69.0: replace remaining use of `gstrndup` with `copyString`.
+		my($pdftocairo_win32) = Path::Tiny->new('utils/pdftocairo-win32.cc');
+		$pdftocairo_win32->edit_lines(sub {
+			s{\Qgstrndup\E}{copyString}g;
+		});
 	};
 
 	build [
 		[ 'cmake', qw(-G), 'Unix Makefiles',
 			'-DCMAKE_INSTALL_PREFIX:PATH=%{.install.prefix}',
 			'-DENABLE_XPDF_HEADERS=ON',
+			(
+				'-DENABLE_GOBJECT_INTROSPECTION=OFF',
+				'-DENABLE_TIFF=OFF',
+			)x!!( $^O eq 'MSWin32' ),
 			( '-DENABLE_GLIB=OFF' )x!!( $^O eq 'darwin' ),
 			'.' ],
 		[ '%{gmake}' ],

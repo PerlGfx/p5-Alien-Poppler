@@ -25,3 +25,6 @@ native:
       - mingw-w64-x86_64-cmake
       - mingw-w64-x86_64-libjpeg-turbo
       - mingw-w64-x86_64-freetype
+
+      # Temporarily use package instead of building.
+      - mingw-w64-x86_64-poppler

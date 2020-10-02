@@ -43,4 +43,4 @@ __END__
 
 L<Poppler|https://poppler.freedesktop.org/>
 
-L<Repository information|http://project-renard.github.io/doc/development/repo/p5-Alien-Poppler/>
+
